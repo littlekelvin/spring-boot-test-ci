@@ -15,13 +15,13 @@ build:
   stage: build
   script:
     - mvn -v && java -version
-    - mvn clean install -P skipTests
+    - mvn clean install -P skipTests -s settings.xml
   tags:
     - SHARE_MAVEN_JDK
 
 tests:
   stage: test
   script:
-    - mvn clean install -P tests
+    - mvn clean install -P tests -s settings.xml
   tags:
     - SHARE_MAVEN_JDK
