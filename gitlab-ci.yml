@@ -1,0 +1,23 @@
+default:
+  image: 'maven:8u222'
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+build:
+  stage: build
+  script:
+    - mvn -v && java -v
+    - mvn clean install -P skipTests
+
+tests:
+  stage: test
+  script:
+    - mvn clean install -P tests
