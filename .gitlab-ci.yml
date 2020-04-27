@@ -14,7 +14,7 @@ cache:
 build:
   stage: build
   script:
-    - mvn -v && java -v
+    - mvn -v && java -version
     - mvn clean install -P skipTests
   tags:
     - SHARE_MAVEN_JDK
