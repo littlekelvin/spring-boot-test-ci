@@ -1,0 +1,4 @@
+INSERT INTO m_author (id, create_by, create_date, last_update_by, last_update_date, age, gender, name) VALUES (1, 'Kelvin46', '2020-03-15 04:37:11.248000000', 'Kelvin46', '2020-03-15 04:37:11', 12, 'male', 'Kelvin');
+
+INSERT INTO m_post (id, create_by, create_date, last_update_by, last_update_date, body, title, author_id) VALUES (1, 'Kelvin46', '2020-03-15 04:37:11.310000000', 'Kelvin46', '2020-03-15 04:37:11', 'post body', 'My Home', 1);
+INSERT INTO m_post (id, create_by, create_date, last_update_by, last_update_date, body, title, author_id) VALUES (2, 'Kelvin46', '2020-03-15 04:37:11.317000000', 'Kelvin46', '2020-03-15 04:37:11', 'post body2', 'My Home2', 1);

@@ -1,0 +1,34 @@
+server:
+  port: 7090
+
+spring:
+  application:
+    name: spring-boot-test-ci
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    username: sa
+    password: sa
+    platform: h2
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: false
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+logging:
+  level:
+    org.hibernate.search: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: DEBUG

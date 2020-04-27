@@ -1,0 +1,1 @@
+INSERT INTO m_user (create_by, create_date, last_update_by, last_update_date, birth_day, password, role, username) VALUES ('Kelvin46', '2020-03-15 04:37:11.317000000', 'Kelvin46', '2020-03-15 04:37:11', sysdate(), '123', 1, 'kelvin');
