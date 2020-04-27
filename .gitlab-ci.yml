@@ -1,5 +1,5 @@
 default:
-  image: 'maven:8u222'
+  image: 'maven:latest'
 
 stages:
   - build
