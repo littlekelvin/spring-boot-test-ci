@@ -16,8 +16,12 @@ build:
   script:
     - mvn -v && java -v
     - mvn clean install -P skipTests
+  tags:
+    - SHARE_MAVEN_JDK
 
 tests:
   stage: test
   script:
     - mvn clean install -P tests
+  tags:
+    - SHARE_MAVEN_JDK
