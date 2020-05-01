@@ -2,21 +2,21 @@ default:
   image: 'maven:latest'
 
 stages:
-  - prepare
+#  - prepare
   - test
   - analysis
 
-prepare:
-  stage: prepare
-  cache:
-    key: m_m2
-    paths:
-      - .m2/repository/
-  script:
-    - mvn -v && java -version
-    - mvn clean install -P skipTests -s settings.xml
-  tags:
-    - SHARE_MAVEN_JDK
+#prepare:
+#  stage: prepare
+#  cache:
+#    key: m_m2
+#    paths:
+#      - .m2/repository/
+#  script:
+#    - mvn -v && java -version
+#    - mvn clean install -P skipTests -s settings.xml
+#  tags:
+#    - SHARE_MAVEN_JDK
 
 tests:
   stage: test
@@ -40,7 +40,7 @@ tests:
 
 analysis:
   stage: analysis
-#  image: sonarsource/sonar-scanner-cli:latest
+  image: sonarsource/sonar-scanner-cli:latest
   cache:
     key: m_m2
     policy: pull
