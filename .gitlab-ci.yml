@@ -25,7 +25,6 @@ tests:
     policy: pull-push
     paths:
       - .m2/repository/
-      - ./target
   script:
     - mvn clean install -P tests -s settings.xml
   artifacts:
@@ -58,8 +57,6 @@ analysis:
     SONAR_PROJECT_BASE_DIR: ./
   script:
     - pwd
-    - ls -l
-    - cd target
     - ls -l
     - sonar-scanner -Dsonar.qualitygate.wait=true
   tags:
