@@ -40,7 +40,7 @@ tests:
 
 analysis:
   stage: analysis
-  image: sonarsource/sonar-scanner-cli:latest
+#  image: sonarsource/sonar-scanner-cli:latest
   cache:
     key: m_m2
     policy: pull
@@ -54,6 +54,6 @@ analysis:
     - pwd & ls -l
     - sonar-scanner -Dsonar.qualitygate.wait=true -Dproject.settings=sonar-project.properties -Dsonar.host.url=http://10.222.225.17:9000 -Dsonar.login=admin -Dsonar.password=admin
   tags:
-    - SHARE_MAVEN_JDK
+    - SONAR_SCANNER
   only:
     - master
