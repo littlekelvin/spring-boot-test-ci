@@ -41,6 +41,7 @@ stages:
 analysis:
   stage: analysis
   image: sonarsource/sonar-scanner-cli:latest
+  entrypoint: [""]
 #  cache:
 #    key: m_m2
 #    policy: pull
