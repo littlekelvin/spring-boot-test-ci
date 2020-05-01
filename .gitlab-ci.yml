@@ -56,6 +56,8 @@ analysis:
   script:
     - pwd
     - ls -l
+    - cd target
+    - ls -l
     - sonar-scanner -Dsonar.qualitygate.wait=true
   tags:
     - SONAR_SCANNER
