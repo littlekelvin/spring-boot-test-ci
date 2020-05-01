@@ -47,12 +47,12 @@ analysis:
     paths:
       - ./target
   variables:
-#    SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
-#    SONAR_HOST_URL: "http://your-sonarqube-instance.org"
+    SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
+    SONAR_HOST_URL: "http://10.222.225.17:9000"
     GIT_DEPTH: 0
   script:
     - pwd & ls -l
-    - sonar-scanner -Dsonar.qualitygate.wait=true -Dproject.settings=sonar-project.properties -Dsonar.host.url=http://10.222.225.17:9000 -Dsonar.login=admin -Dsonar.password=admin
+    - sonar-scanner -Dsonar.qualitygate.wait=true -Dproject.settings=sonar-project.properties
   tags:
     - SONAR_SCANNER
   only:
