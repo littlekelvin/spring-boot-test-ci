@@ -43,9 +43,9 @@ analysis:
   image: sonarsource/sonar-scanner-cli:latest
   cache:
     key: m_m2
-      policy: pull
-      paths:
-        - ./target
+    policy: pull
+    paths:
+      - ./target
   variables:
 #    SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
 #    SONAR_HOST_URL: "http://your-sonarqube-instance.org"
