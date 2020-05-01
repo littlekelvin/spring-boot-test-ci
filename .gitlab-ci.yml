@@ -26,6 +26,7 @@ tests:
     paths:
       - .m2/repository/
   script:
+    - mvn -v && java -version
     - mvn clean install -P tests -s settings.xml
   artifacts:
     when: on_success
