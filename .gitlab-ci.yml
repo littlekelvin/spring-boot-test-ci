@@ -31,8 +31,11 @@ tests:
   artifacts:
     when: on_success
     paths:
-      - target/failsafe/reports
-      - target/surefire/reports
+      - target/failsafe-reports
+      - target/surefire-reports
+      - target/classes
+      - target/test-classes
+      - target/site
       - target/*.exec
   coverage: '/Code coverage: \d+\.\d+/'
   tags:
