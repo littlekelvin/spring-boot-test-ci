@@ -46,11 +46,6 @@ analysis:
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: ['']
-  cache:
-    key: m_m2
-    policy: pull
-    paths:
-      - ./target
   variables:
     SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
     SONAR_HOST_URL: "http://10.222.225.17:9000"
