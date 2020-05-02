@@ -68,9 +68,6 @@
                 <skipIntTest>true</skipIntTest>
                 <skipUnitTest>false</skipUnitTest>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
         <profile>
             <id>int</id>
@@ -92,6 +89,9 @@
                 <skipIntTest>true</skipIntTest>
                 <skipUnitTest>true</skipUnitTest>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 

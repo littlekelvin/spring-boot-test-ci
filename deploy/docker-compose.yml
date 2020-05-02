@@ -1,0 +1,38 @@
+version: '3'
+services:
+  spring-boot-app:
+    image: spring-boot-test-ci:v1
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: spring-boot-ci
+    entrypoint:
+      - MYSQL_HOST=mysql
+      - MYSQL_USERNAME=ci
+      - MYSQL_PASSWORD=ci
+    privileged: true
+    ports:
+      - 8001:8001
+    volumes:
+      - /home/ci/volumes/app:/usr/app
+    depends_on:
+      - mysql
+    networks:
+      - webnet
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+#    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password1
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=ci
+      - MYSQL_PASSWORD=ci
+    ports:
+      - 3306:3306
+    volumes:
+      - /home/ci/volumes/mysql/data:/var/lib/mysql
+
+networks:
+  webnet:
