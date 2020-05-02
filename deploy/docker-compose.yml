@@ -10,6 +10,7 @@ services:
       - MYSQL_HOST=mysql
       - MYSQL_USERNAME=ci
       - MYSQL_PASSWORD=ci
+      - DB_NAME=testdb
     privileged: true
     ports:
       - 8001:8001

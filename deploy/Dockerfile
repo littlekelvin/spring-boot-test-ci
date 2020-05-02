@@ -10,4 +10,4 @@ VOLUME /usr/app
 
 EXPOSE 8001/tcp
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=prod"]
