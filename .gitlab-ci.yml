@@ -14,7 +14,7 @@ prepare:
       - .m2/repository/
   script:
     - mvn -v && java -version
-    - mvn clean compile
+    - mvn clean compile -s settings.xml
   tags:
     - SHARE_MAVEN_JDK
 
