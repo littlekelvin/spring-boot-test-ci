@@ -2,9 +2,6 @@ version: '3'
 services:
   spring-boot-app:
     image: spring-boot-test-ci:v1
-    build:
-      dockerfile: Dockerfile
-      context: .
     container_name: spring-boot-ci
     environment:
       - MYSQL_HOST=mysql
