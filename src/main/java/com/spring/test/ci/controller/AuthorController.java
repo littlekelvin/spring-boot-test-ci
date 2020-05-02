@@ -24,4 +24,13 @@ public class AuthorController {
         responseDto.setData(authors);
         return  responseDto;
     }
+
+    @RequestMapping("/author2/{name}")
+    public ResponseDto<List<Author> > getResponseDto(@PathVariable("name") String name) {
+        List<Author> authors = authorService.findAuthorByName(name);
+        ResponseDto<List<Author> > responseDto = new ResponseDto<>();
+        responseDto.setSuccess(true);
+        responseDto.setData(authors);
+        return  responseDto;
+    }
 }

@@ -14,7 +14,7 @@ prepare:
       - .m2/repository/
   script:
     - mvn -v && java -version
-    - mvn clean install -P skipTests -s settings.xml
+    - mvn clean compile
   tags:
     - SHARE_MAVEN_JDK
 
@@ -26,7 +26,6 @@ tests:
     paths:
       - .m2/repository/
   script:
-    - mvn -v && java -version
     - mvn clean install -P tests -s settings.xml
   artifacts:
     when: on_success
