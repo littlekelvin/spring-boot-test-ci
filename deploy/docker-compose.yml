@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       context: .
     container_name: spring-boot-ci
-    entrypoint:
+    environment:
       - MYSQL_HOST=mysql
       - MYSQL_USERNAME=ci
       - MYSQL_PASSWORD=ci
