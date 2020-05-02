@@ -2,60 +2,94 @@ default:
   image: 'maven:3.6.3-openjdk-8'
 
 stages:
-  - prepare
-  - test
-  - analysis
+#  - prepare
+#  - test
+#  - analysis
+  - package
   - deploy
 
-prepare:
-  stage: prepare
-  cache:
-    key: m_m2
-    paths:
-      - .m2/repository/
-  script:
-    - mvn -v && java -version
-    - mvn clean install -s settings.xml
-  tags:
-    - SHARE_MAVEN_JDK
+#prepare:
+#  stage: prepare
+#  cache:
+#    key: m_m2
+#    paths:
+#      - .m2/repository/
+#  script:
+#    - mvn -v && java -version
+#    - mvn clean install -s settings.xml
+#  tags:
+#    - SHARE_MAVEN_JDK
+#
+#tests:
+#  stage: test
+#  cache:
+#    key: m_m2
+#    policy: pull
+#    paths:
+#      - .m2/repository/
+#  script:
+#    - mvn clean install -P tests -s settings.xml
+#  artifacts:
+#    when: on_success
+#    paths:
+#      - target/failsafe-reports
+#      - target/surefire-reports
+#      - target/classes
+#      - target/test-classes
+#      - target/site
+#      - target/*.exec
+#  coverage: '/Code coverage: \d+\.\d+/'
+#  tags:
+#    - SHARE_MAVEN_JDK
+#
+#analysis:
+#  stage: analysis
+#  image:
+#    name: sonarsource/sonar-scanner-cli:latest
+#    entrypoint: ['']
+#  variables:
+#    SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
+#    SONAR_HOST_URL: "http://10.222.225.17:9000"
+#    GIT_DEPTH: 0
+#    SONAR_PROJECT_BASE_DIR: ./
+#  script:
+#    - pwd
+#    - ls -l
+#    - sonar-scanner -Dsonar.qualitygate.wait=true
+#  tags:
+#    - SONAR_SCANNER
+#  only:
+#    - master
 
-tests:
-  stage: test
+package:
+  stage: package
   cache:
     key: m_m2
     policy: pull-push
     paths:
       - .m2/repository/
   script:
-    - mvn clean install -P tests -s settings.xml
+    - mvn clean install -P skipTests -s settings.xml
   artifacts:
     when: on_success
     paths:
-      - target/failsafe-reports
-      - target/surefire-reports
-      - target/classes
-      - target/test-classes
-      - target/site
-      - target/*.exec
-  coverage: '/Code coverage: \d+\.\d+/'
+      - target/spring-boot-test-ci.jar
   tags:
     - SHARE_MAVEN_JDK
 
-analysis:
-  stage: analysis
-  image:
-    name: sonarsource/sonar-scanner-cli:latest
-    entrypoint: ['']
-  variables:
-    SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
-    SONAR_HOST_URL: "http://10.222.225.17:9000"
-    GIT_DEPTH: 0
-    SONAR_PROJECT_BASE_DIR: ./
+deploy:
+  stage: deploy
+  image: ictu/sshpass:latest
   script:
     - pwd
     - ls -l
-    - sonar-scanner -Dsonar.qualitygate.wait=true
+    - ls ./target/
+    - sshpass -p ci scp -o StrictHostKeyChecking=no target/spring-boot-test-ci.jar ci@maike-w10:/home/ci/appsrc/spring-boot-ci/spring-boot-test-ci.jar
+    - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/Dockerfile ci@maike-w10:/home/ci/appsrc/spring-boot-ci/Dockerfile
+    - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/docker-compose.yml ci@maike-w10:/home/ci/appsrc/spring-boot-ci/docker-compose.yml
+    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker-compose -f /home/ci/appsrc/spring-boot-ci/docker-compose.yml up -d --build'
   tags:
-    - SONAR_SCANNER
+    - SSH_REMOTE_DEPLOY
   only:
     - master
+
