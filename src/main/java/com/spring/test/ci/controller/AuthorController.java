@@ -4,6 +4,7 @@ import com.spring.test.ci.dto.ResponseDto;
 import com.spring.test.ci.entities.Author;
 import com.spring.test.ci.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,5 +33,10 @@ public class AuthorController {
         responseDto.setSuccess(true);
         responseDto.setData(authors);
         return  responseDto;
+    }
+
+    @GetMapping("/hello/{name}")
+    public String hello(@PathVariable(value = "name") String name) {
+        return "hello, " + name;
     }
 }
