@@ -87,8 +87,9 @@ deploy:
     - sshpass -p ci scp -o StrictHostKeyChecking=no target/spring-boot-test-ci-1.0.0.jar ci@maike-w10:/home/ci/appsrc/spring-boot-ci/spring-boot-test-ci.jar
     - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/Dockerfile ci@maike-w10:/home/ci/appsrc/spring-boot-ci/Dockerfile
     - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/docker-compose.yml ci@maike-w10:/home/ci/appsrc/spring-boot-ci/docker-compose.yml
-    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker build -f /home/ci/appsrc/spring-boot-ci/Dockerfile -t spring-boot-test-ci:v1 /home/ci/appsrc/spring-boot-ci/'
-    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker-compose -f /home/ci/appsrc/spring-boot-ci/docker-compose.yml up -d'
+#    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker build -f /home/ci/appsrc/spring-boot-ci/Dockerfile -t spring-boot-test-ci:v1 /home/ci/appsrc/spring-boot-ci/'
+    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker stop spring-boot-ci'
+    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker-compose -f /home/ci/appsrc/spring-boot-ci/docker-compose.yml up -d --build'
   tags:
     - SSH_REMOTE_DEPLOY
   only:
