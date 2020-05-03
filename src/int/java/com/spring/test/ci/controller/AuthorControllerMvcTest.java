@@ -48,4 +48,13 @@ public class AuthorControllerMvcTest extends WebMvcTestBase {
         authors.add(author);
         return authors;
     }
+
+    @Test
+    public void should_return_hello_given_name() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/hello/Kelvin")).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getContentAsString()).isEqualTo("hello, Kelvin");
+    }
 }

@@ -37,6 +37,6 @@ public class AuthorController {
 
     @GetMapping("/hello/{name}")
     public String hello(@PathVariable(value = "name") String name) {
-        return "hello22, " + name;
+        return "hello, " + name;
     }
 }
