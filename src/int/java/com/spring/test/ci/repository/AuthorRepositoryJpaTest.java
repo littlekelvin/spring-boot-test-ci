@@ -21,13 +21,13 @@ public class AuthorRepositoryJpaTest extends JpaTestBase {
         Post post2 = Post.builder().body("post body2").title("My Home2").build();
         posts.add(post);
         posts.add(post2);
-        Author author = Author.builder().name("Maike")
+        Author author = Author.builder().name("Jack")
                 .gender("female")
                 .age(23).posts(posts).build();
         post.setAuthor(author);
         post2.setAuthor(author);
         Author result = authorRepository.save(author);
-        assertThat(result.getName()).isEqualTo("Maike");
+        assertThat(result.getName()).isEqualTo("Jack");
         assertThat(result.getGender()).isEqualTo("female");
     }
 

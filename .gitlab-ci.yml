@@ -49,7 +49,8 @@ analysis:
     entrypoint: ['']
   variables:
     SONAR_TOKEN: '67296badea93b1a60d324330852a6256a1fec8b4'
-    SONAR_HOST_URL: "http://10.222.225.17:9000"
+    ## sonar server ip
+    SONAR_HOST_URL: "http://localhost:9000"
     GIT_DEPTH: 0
     SONAR_PROJECT_BASE_DIR: ./
   script:
@@ -84,12 +85,12 @@ deploy:
     - pwd
     - ls -l
     - ls ./target/
-    - sshpass -p ci scp -o StrictHostKeyChecking=no target/spring-boot-test-ci-1.0.0.jar ci@maike-w10:/home/ci/appsrc/spring-boot-ci/spring-boot-test-ci.jar
-    - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/Dockerfile ci@maike-w10:/home/ci/appsrc/spring-boot-ci/Dockerfile
-    - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/docker-compose.yml ci@maike-w10:/home/ci/appsrc/spring-boot-ci/docker-compose.yml
-#    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker build -f /home/ci/appsrc/spring-boot-ci/Dockerfile -t spring-boot-test-ci:v1 /home/ci/appsrc/spring-boot-ci/'
-    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker stop spring-boot-ci'
-    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@maike-w10 'docker-compose -f /home/ci/appsrc/spring-boot-ci/docker-compose.yml up -d --build'
+    - sshpass -p ci scp -o StrictHostKeyChecking=no target/spring-boot-test-ci-1.0.0.jar ci@localhost:/home/ci/appsrc/spring-boot-ci/spring-boot-test-ci.jar
+    - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/Dockerfile ci@localhost:/home/ci/appsrc/spring-boot-ci/Dockerfile
+    - sshpass -p ci scp -o StrictHostKeyChecking=no deploy/docker-compose.yml ci@localhost:/home/ci/appsrc/spring-boot-ci/docker-compose.yml
+#    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@localhost 'docker build -f /home/ci/appsrc/spring-boot-ci/Dockerfile -t spring-boot-test-ci:v1 /home/ci/appsrc/spring-boot-ci/'
+    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@localhost 'docker stop spring-boot-ci'
+    - sshpass -p ci ssh -o StrictHostKeyChecking=no ci@localhost 'docker-compose -f /home/ci/appsrc/spring-boot-ci/docker-compose.yml up -d --build'
   tags:
     - SSH_REMOTE_DEPLOY
   only:
